@@ -13,7 +13,7 @@ def fixup_url(url, base_url):
     base_scheme = urlparse(base_url).scheme
     configured_scheme = urlparse(url).scheme
     if base_scheme != configured_scheme:
-        url = url.replace(configured_scheme, base_scheme)
+        url = url.replace(configured_scheme, base_scheme, 1)
 
     domain = urlparse(url).netloc
     base_domain = urlparse(base_url).netloc

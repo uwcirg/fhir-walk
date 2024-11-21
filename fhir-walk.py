@@ -1,4 +1,4 @@
-#!/bin/env python3
+#!/usr/bin/env python3
 
 import requests, sys, json
 from urllib.parse import urlparse
@@ -10,6 +10,11 @@ def fixup_url(url, base_url):
     Helpful when a FHIR server is configured with a server_name that does not match its public one
     No generalized solution when urls significantly different
     """
+    base_scheme = urlparse(base_url).scheme
+    configured_scheme = urlparse(url).scheme
+    if base_scheme != configured_scheme:
+        url = url.replace(configured_scheme, base_scheme)
+
     domain = urlparse(url).netloc
     base_domain = urlparse(base_url).netloc
     url = url.replace(domain, base_domain)
